@@ -118,9 +118,19 @@ Module.register("MMM-2Day-NOAA-Forecast", {
         } fa-fw detail-icon`;
         tempIcon.setAttribute("height", "15");
         tempIcon.setAttribute("width", "15");
+	if(i === 0 || i === 2){
+            tempIcon.classList.add("mmm-2day-noaa-forecast-max-temp");
+	} else if(i === 1 || i === 3 ){
+            tempIcon.classList.add("mmm-2day-noaa-forecast-min-temp");
+	}
 
         let tempText = document.createElement("span");
         tempText.className = "detail-text";
+	if(i === 0 || i === 2){
+            tempText.classList.add("mmm-2day-noaa-forecast-max-temp");
+	} else if(i === 1 || i === 3 ){
+            tempText.classList.add("mmm-2day-noaa-forecast-min-temp");
+	}
         tempText.innerHTML = this.convertTemp(this.forecast[i].temp);
 
         let tempBr = document.createElement("br");
