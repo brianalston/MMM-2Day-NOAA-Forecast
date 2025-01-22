@@ -82,9 +82,7 @@ Module.register("MMM-2Day-NOAA-Forecast", {
         forecastDayNight.className = "forecast-day-night";
 
         let forecastIcon = document.createElement("i");
-        forecastIcon.className = `fa fa-${
-          this.iconMap[this.forecast[i].icon][this.forecast[i].isDay ? 0 : 1]
-        } fa-2x forecast-icon`;
+        forecastIcon.className = `fa fa-${this.iconMap[this.forecast[i].icon][this.forecast[i].isDay ? 0 : 1]} fa-2x forecast-icon`;
         forecastIcon.setAttribute("height", "50");
         forecastIcon.setAttribute("width", "50");
 
@@ -111,24 +109,20 @@ Module.register("MMM-2Day-NOAA-Forecast", {
 
         // Build up the details regarding temprature
         let tempIcon = document.createElement("i");
-        tempIcon.className = `fa ${
-          this.forecast[i].isDay
-            ? "fa-temperature-three-quarters"
-            : "fa-temperature-quarter"
-        } fa-fw detail-icon`;
+        tempIcon.className = `fa ${this.forecast[i].isDay ? "fa-temperature-three-quarters" : "fa-temperature-quarter"} fa-fw detail-icon`;
         tempIcon.setAttribute("height", "15");
         tempIcon.setAttribute("width", "15");
-	if(i === 0 || i === 2){
+	if(i % 2 === 0){
             tempIcon.classList.add("mmm-2day-noaa-forecast-max-temp");
-	} else if(i === 1 || i === 3 ){
+	} else {
             tempIcon.classList.add("mmm-2day-noaa-forecast-min-temp");
 	}
 
         let tempText = document.createElement("span");
         tempText.className = "detail-text";
-	if(i === 0 || i === 2){
+	if(i % 0 === 0){
             tempText.classList.add("mmm-2day-noaa-forecast-max-temp");
-	} else if(i === 1 || i === 3 ){
+	} else {
             tempText.classList.add("mmm-2day-noaa-forecast-min-temp");
 	}
         tempText.innerHTML = this.convertTemp(this.forecast[i].temp);
@@ -147,19 +141,6 @@ Module.register("MMM-2Day-NOAA-Forecast", {
 
         let rainBr = document.createElement("br");
 
-        // Removed per https://www.weather.gov/media/notification/pdf_2023_24/scn24-55_api_v1.13.pdf 
-        // Build up the details regarding humidity %
-        // let humidIcon = document.createElement("i");
-        // humidIcon.className = "fa fa-droplet fa-fw detail-icon";
-        // humidIcon.setAttribute("height", "15");
-        // humidIcon.setAttribute("width", "15");
-
-        // let humidText = document.createElement("span");
-        // humidText.className = "detail-text";
-        // humidText.innerHTML = `${this.forecast[i].humid} %`;
-
-        // let humidBr = document.createElement("br");
-
         // Build up the details regarding wind
         let windIcon = document.createElement("i");
         windIcon.className = "fa fa-wind fa-fw detail-icon";
@@ -168,9 +149,7 @@ Module.register("MMM-2Day-NOAA-Forecast", {
 
         let windText = document.createElement("span");
         windText.className = "detail-text";
-        windText.innerHTML = `${this.convertWindSpeed(this.forecast[i].wspd)} ${
-          this.forecast[i].wdir
-        }`;
+        windText.innerHTML = `${this.convertWindSpeed(this.forecast[i].wspd)} ${this.forecast[i].wdir}`;
 
         // Now assemble the details
         forecastDetail.appendChild(tempIcon);
@@ -179,10 +158,6 @@ Module.register("MMM-2Day-NOAA-Forecast", {
         forecastDetail.appendChild(rainIcon);
         forecastDetail.appendChild(rainText);
         forecastDetail.appendChild(rainBr);
-        // Removed per https://www.weather.gov/media/notification/pdf_2023_24/scn24-55_api_v1.13.pdf 
-        // forecastDetail.appendChild(humidIcon);
-        // forecastDetail.appendChild(humidText);
-        // forecastDetail.appendChild(humidBr);
         forecastDetail.appendChild(windIcon);
         forecastDetail.appendChild(windText);
 
@@ -214,7 +189,7 @@ Module.register("MMM-2Day-NOAA-Forecast", {
       // we got some data so set the flag, stash the data to display then request the dom update
       this.loaded = true;
       this.forecast = payload.forecast;
-      //console.log(this.forecast);
+      // console.log(this.forecast);
       this.updateDom(1000);
     }
   },
