@@ -120,7 +120,7 @@ Module.register("MMM-2Day-NOAA-Forecast", {
 
         let tempText = document.createElement("span");
         tempText.className = "detail-text";
-	if(i % 0 === 0){
+	if(i % 2 === 0){
             tempText.classList.add("mmm-2day-noaa-forecast-max-temp");
 	} else {
             tempText.classList.add("mmm-2day-noaa-forecast-min-temp");
