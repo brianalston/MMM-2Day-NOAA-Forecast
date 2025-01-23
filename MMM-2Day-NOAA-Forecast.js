@@ -109,22 +109,12 @@ Module.register("MMM-2Day-NOAA-Forecast", {
 
         // Build up the details regarding temprature
         let tempIcon = document.createElement("i");
-        tempIcon.className = `fa ${this.forecast[i].isDay ? "fa-temperature-three-quarters" : "fa-temperature-quarter"} fa-fw detail-icon`;
+        tempIcon.className = `fa ${this.forecast[i].isDay ? "fa-temperature-three-quarters mmm-2day-noaa-forecast-max-temp" : "fa-temperature-quarter mmm-2day-noaa-forecast-min-temp"} fa-fw detail-icon`;
         tempIcon.setAttribute("height", "15");
         tempIcon.setAttribute("width", "15");
-	if(i % 2 === 0){
-            tempIcon.classList.add("mmm-2day-noaa-forecast-max-temp");
-	} else {
-            tempIcon.classList.add("mmm-2day-noaa-forecast-min-temp");
-	}
 
         let tempText = document.createElement("span");
-        tempText.className = "detail-text";
-	if(i % 2 === 0){
-            tempText.classList.add("mmm-2day-noaa-forecast-max-temp");
-	} else {
-            tempText.classList.add("mmm-2day-noaa-forecast-min-temp");
-	}
+        tempText.className = `fa ${this.forecast[i].isDay ? "detail-text mmm-2day-noaa-forecast-max-temp" : "detail-text mmm-2day-noaa-forecast-min-temp"} fa-fw detail-icon`;
         tempText.innerHTML = this.convertTemp(this.forecast[i].temp);
 
         let tempBr = document.createElement("br");
